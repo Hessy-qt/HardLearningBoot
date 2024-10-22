@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+</head>
+<body>
+<h3>Edit chosen user</h3>
+<form th:method="post" th:action ="@{/users/editUser}" th:object ="${user}">
+    <input type="hidden" th:field="*{id}"/>
+    <label for="username">Enter new name:</label>
+    <input type="text" th:field = "*{name}" id = "username"/>
+    <br/>
+    <br/>
+    <label for="surname">Enter new surname:</label>
+    <input type="text" th:field = "*{surname}" id = "surname"/>
+    <br/>
+    <input type="submit" value="Edit user">
+</form>
+</body>
+</html>

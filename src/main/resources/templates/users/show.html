@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table of users</title>
+</head>
+
+<!--добавил стиль из интернета, чтобы немного поприятнее выглядело-->
+<style>
+    .table {
+        width: 100%;
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    .table thead th {
+        padding: 10px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: left;
+        color: #444441;
+        border-top: 2px solid #716561;
+        border-bottom: 2px solid #716561;
+    }
+
+    .table tbody td {
+        padding: 10px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #444441;
+        border-top: 1px solid #716561;
+    }
+
+</style>
+<body>
+<div>
+    <table border="1" class="table">
+        <caption class="-summary">Table of users</caption>
+
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Id</th>
+            <th>Operations</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:utext="${user.getName()}">name</td>
+            <td th:utext="${user.getSurname()}">surname</td>
+            <td th:utext="${user.getId()}">id</td>
+            <td style="display: flex;">
+                <form th:method="post" th:action="@{/users/editUserPage}">
+                    <input type="hidden" name="id" th:value="${user.getId()}"/>
+                    <input type="hidden" name="name" th:value="${user.getName()}"/>
+                    <input type="hidden" name="surname" th:value="${user.getSurname()}"/>
+                    <input type="submit" value="Edit">
+                </form>
+                <form th:method="post" th:action="@{/users/deleteUser}">
+                    <input type="hidden" name="id" th:value="${user.getId()}"/>
+                    <input type="hidden" name="name" th:value="${user.getName()}"/>
+                    <input type="hidden" name="surname" th:value="${user.getSurname()}"/>
+                    <input type="submit" value="Delete" style="float: right">
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <form>
+        <input type="button" value="Add new user" onclick=location.href="/users/addUser">
+    </form>
+</div>
+</body>
+</html>
